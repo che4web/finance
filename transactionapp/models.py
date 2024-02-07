@@ -17,4 +17,9 @@ class Operation(models.Model):
                                  on_delete=models.SET_NULL,
                                  blank=True,
                                  null=True)
+    def save(self,*args,**kwargs):
+        if not self.id:
+            self.bankcard.balance-=self.value
+            self.bankcard.save()
+        return super(*args,**kwargs).save()
 

@@ -1,0 +1,8 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1>Список карт</h1>
+
+{% for card in operation_list%}
+<div> <a href="{{card.get_absolute_url}}"> {{card.name}} {{card.value}} {{card.category}} </a>  {{card.bankcard}}</div>
+{%endfor%}
+{%endblock%}
