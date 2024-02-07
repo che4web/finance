@@ -1,0 +1,8 @@
+{%extends 'base.html'%}
+{%block content%}
+<h1> {{bankcard.name}}</h1>
+
+{% for operation in bankcard.operation_set.all%}
+<div> {{operation.name}} {{operation.value}} {{operation.category.name}} </div>
+{%endfor%}
+{%endblock%}
