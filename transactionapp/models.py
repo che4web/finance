@@ -17,6 +17,9 @@ class Operation(models.Model):
                                  on_delete=models.SET_NULL,
                                  blank=True,
                                  null=True)
+    class Meta:
+        verbose_name= 'Операция'
+        verbose_name_plural= 'Операции'
 
     def get_bank_img_url(self):
         if self.bankcard.img:
