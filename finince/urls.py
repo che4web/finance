@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from bankapp.views import bankcard_list,bankcard_detail
-from transactionapp.views import operation_list,OperationList
+from transactionapp.views import operation_list,OperationList,operation_create
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',bankcard_list),
     path('card/<int:pk>/',bankcard_detail),
+    path('operation/create',operation_create),
     path('operation/',operation_list),
     #path('operation/',OperationList.as_view()),
     path('admin/', admin.site.urls),

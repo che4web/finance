@@ -1,16 +1,11 @@
 {%extends 'base.html'%}
 {%block content%}
 <h1>Список карт</h1>
-<form>
-    <input 
-    name="operation_name"  
-    class="form-control" 
-    value="{{request.GET.operation_name}}"> 
-    <input 
-    name="value"  
-    class="form-control" 
-    value="{{request.GET.value}}"> 
 
+
+<form>
+
+{{form}}
 <button class="btn btn-primary"> поиск </button>
 </form>
 {% for card in operation_list%}
