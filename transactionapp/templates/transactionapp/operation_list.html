@@ -2,13 +2,29 @@
 {%block content%}
 <h1>Список карт</h1>
 
+<input name="operation_name" class="form-control" id="id_operation_name" oninput="getData()">
+<button class="btn btn-primary" onclick="getData()"> поиск </button>
+<div id="operation_list_div">
+<script>
+    function operatinRener(o){
+        return` <li> ${o.id}  ${o.name} ${o.value}</li>`
+    }
 
-<form>
+async function getData(){
+    let operation_name= document.getElementById("id_operation_name").value
+    let response =  await  fetch("/api/operation/?name="+operation_name)
+    let r = await response.json()
+    console.log(r)
+    let el = document.getElementById('operation_list_div')
+    let html = '<ul>'
+    for (o  of r){
+        html +=operatinRener(o)
+    }
+    html+='</ul>'
+    el.innerHTML = html
 
-{{form}}
-<button class="btn btn-primary"> поиск </button>
-</form>
-{% for card in operation_list%}
-<div> <a href="{{card.get_absolute_url}}"> {{card.name}} {{card.value}} {{card.category}} </a>  {{card.bankcard}}</div>
-{%endfor%}
+
+}
+getData()
+</script>
 {%endblock%}
