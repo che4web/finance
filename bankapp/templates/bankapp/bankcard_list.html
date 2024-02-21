@@ -3,6 +3,6 @@
 <h1>Список карт</h1>
 
 {% for card in bankcard_list%}
-<div> <a href="{{card.get_absolute_url}}"> {{card}} </a> </div>
+<div> <img src="{{card.img.url}}"><a href="{{card.get_absolute_url}}"> {{card}} </a> </div>
 {%endfor%}
 {%endblock%}

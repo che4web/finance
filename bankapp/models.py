@@ -9,6 +9,7 @@ class BankCard(models.Model):
         decimal_places=2,
         default=0,blank=True
     )
+    img = models.ImageField(blank=True,null=True)
 
     def __str__(self):
         return f'{self.name}-{self.balance}'

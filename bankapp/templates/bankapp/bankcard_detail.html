@@ -3,6 +3,6 @@
 <h1> {{bankcard.name}}</h1>
 
 {% for operation in bankcard.operation_set.all%}
-<div> {{operation.name}} {{operation.value}} {{operation.category.name}} </div>
+<div>  <img src="{{operation.get_bank_img_url}}">{{operation.name}} {{operation.value}} {{operation.category.name}} </div>
 {%endfor%}
 {%endblock%}
