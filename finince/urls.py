@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',bankcard_list),
     path('card/<int:pk>/',bankcard_detail),
-    #path('operation/',operation_list),
-    path('operation/',OperationList.as_view()),
+    path('operation/',operation_list),
+    #path('operation/',OperationList.as_view()),
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

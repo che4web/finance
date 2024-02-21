@@ -1,7 +1,18 @@
 {%extends 'base.html'%}
 {%block content%}
 <h1>Список карт</h1>
+<form>
+    <input 
+    name="operation_name"  
+    class="form-control" 
+    value="{{request.GET.operation_name}}"> 
+    <input 
+    name="value"  
+    class="form-control" 
+    value="{{request.GET.value}}"> 
 
+<button class="btn btn-primary"> поиск </button>
+</form>
 {% for card in operation_list%}
 <div> <a href="{{card.get_absolute_url}}"> {{card.name}} {{card.value}} {{card.category}} </a>  {{card.bankcard}}</div>
 {%endfor%}

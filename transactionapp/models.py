@@ -17,7 +17,6 @@ class Operation(models.Model):
                                  on_delete=models.SET_NULL,
                                  blank=True,
                                  null=True)
-    bank_img = models.ImageField()
 
     def get_bank_img_url(self):
         if self.bankcard.img:
