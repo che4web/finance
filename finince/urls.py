@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from bankapp.views import bankcard_list,bankcard_detail
+from bankapp.views import bankcard_list,bankcard_detail,BankCardViewSet
 from transactionapp.views import (
     operation_list,
     OperationList,
@@ -31,7 +31,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
+
 router.register(r'operation', OperationViewSet)
+router.register(r'bankcard', BankCardViewSet)
 
 urlpatterns = [
     path('',bankcard_list),

@@ -1,6 +1,36 @@
 from django.shortcuts import render
 from bankapp.models import BankCard
 
+
+
+
+from rest_framework import routers, serializers, viewsets
+
+# Create your views here.
+
+import django_filters
+from django_filters import rest_framework as filters
+
+class BankCardFilter(django_filters.FilterSet):
+    class Meta:
+        model = BankCard
+        # fields = '__all__'
+        exclude ="img"
+
+
+class BankCardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BankCard
+        fields = "__all__"
+
+class BankCardViewSet(viewsets.ModelViewSet):
+    queryset = BankCard.objects.all()
+    serializer_class = BankCardSerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = BankCardFilter
+
+
+
 # Create your views here.
 def bankcard_list(request):
     context = {
