@@ -19,6 +19,7 @@ class BankCardFilter(django_filters.FilterSet):
 
 
 class BankCardSerializer(serializers.ModelSerializer):
+    img_url = serializers.CharField(read_only=True)
     class Meta:
         model = BankCard
         fields = "__all__"

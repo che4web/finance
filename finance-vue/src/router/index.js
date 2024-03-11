@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import OperationList from "../views/OperationList.vue"
+import OperationListView from "../views/OperationListView.vue"
 import CardList from "../views/CardList.vue"
 
 const router = createRouter({
@@ -21,7 +21,7 @@ const router = createRouter({
     {
       path: '/operation',
       name: 'operation-list',
-      component: OperationList
+      component: OperationListView
     },
     {
       path: '/about',

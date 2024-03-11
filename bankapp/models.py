@@ -10,6 +10,11 @@ class BankCard(models.Model):
         default=0,blank=True
     )
     img = models.ImageField(blank=True,null=True)
+    def img_url(self):
+        if self.img:
+            return self.img.url
+        else:
+            return None
 
     def __str__(self):
         return f'{self.name}-{self.balance}'

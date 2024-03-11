@@ -5,6 +5,7 @@ from transactionapp.models import Operation
 from transactionapp.forms import SearchForm,OperationForm
 
 from rest_framework import routers, serializers, viewsets
+from rest_framework.filters import OrderingFilter
 
 # Create your views here.
 
@@ -12,6 +13,7 @@ import django_filters
 from django_filters import rest_framework as filters
 
 class OperationFilter(django_filters.FilterSet):
+    search = filters.CharFilter(field_name="name",lookup_expr="icontains")
     class Meta:
         model = Operation
         fields = '__all__'
@@ -25,7 +27,8 @@ class OperationSerializer(serializers.ModelSerializer):
 class OperationViewSet(viewsets.ModelViewSet):
     queryset = Operation.objects.all()
     serializer_class = OperationSerializer
-    filter_backends = (filters.DjangoFilterBackend,)
+    filter_backends = (OrderingFilter,filters.DjangoFilterBackend,)
+    ordering_fields = '__all__'
     filterset_class = OperationFilter
 
 def operation_list(request):
