@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.views.generic import ListView
 from transactionapp.models import Operation
 from transactionapp.forms import SearchForm,OperationForm
+from bankapp.models import BankCard
 
 from rest_framework import routers, serializers, viewsets
 from rest_framework.filters import OrderingFilter
@@ -20,6 +21,13 @@ class OperationFilter(django_filters.FilterSet):
 
 
 class OperationSerializer(serializers.ModelSerializer):
+    bankcard = serializers.PrimaryKeyRelatedField(queryset=BankCard.objects.all())
+
+    def create(self, validated_data):
+        bankcard = validated_data.pop('bankcard')
+        op =  Operation(bankcard=bankcard,**validated_data)
+        op.save()
+        return op
     class Meta:
         model = Operation
         fields = "__all__"

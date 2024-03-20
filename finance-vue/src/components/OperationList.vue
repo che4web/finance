@@ -29,6 +29,13 @@ function setOrdering(name){
     
 }
 
+const newItem= ref({})
+async function saveItem(){
+    let reponseItem =  await Operation.objects.save(newItem.value)
+    data.value.push(reponseItem) 
+    newItem.value= {}
+}
+
 </script>
 <template>
     <div>
@@ -47,7 +54,17 @@ function setOrdering(name){
                 <td>{{item.bankcard}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.value}}</td>
-                </tr>
+            </tr>
+            <tr >  
+                <td > {{newItem.id}}</td>
+                <td ><input v-model="newItem.bankcard"</td>
+                <td ><input v-model="newItem.name"</td>
+                <td ><input v-model="newItem.value"</td>
+                <td > 
+                    <button class="btn btn-primary" @click="saveItem()"> сохранить</button>
+                </td>
+            </tr>
+
         </tbody>
         </table>
     </div>
