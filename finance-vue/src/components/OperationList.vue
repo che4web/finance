@@ -1,6 +1,7 @@
 <script setup>
 import { ref,onMounted,watch} from "vue"
-import {Operation} from "@/api.js"
+import {Operation,BankCard} from "@/api.js"
+import {useBackCardStore} from "@/stores/bankCard.js"
 const data =ref([])
 const props =defineProps(['search','bankcard'])
 const ordering = ref('')
@@ -14,8 +15,10 @@ async function getData(){
     }
     data.value   = await Operation.objects.filter(filter)
 }
-
-onMounted(()=>getData())
+let store = useBackCardStore()
+onMounted(()=>{
+    getData()
+})
 watch(()=>props.search,()=>getData())
 watch(()=>ordering.value,()=>getData())
 
@@ -31,7 +34,8 @@ function setOrdering(name){
 
 const newItem= ref({})
 async function saveItem(){
-    let reponseItem =  await Operation.objects.save(newItem.value)
+    let reponseItem =  await Operation.objects.dsave(newItem.value)
+
     data.value.push(reponseItem) 
     newItem.value= {}
 }
@@ -51,13 +55,16 @@ async function saveItem(){
         <tbody >
             <tr v-for="item in data">  
                 <td >{{item.id }}</td>
-                <td>{{item.bankcard}}</td>
+                <td>{{item.bankcard.name}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.value}}</td>
             </tr>
             <tr >  
                 <td > {{newItem.id}}</td>
-                <td ><input v-model="newItem.bankcard"</td>
+                <td ><select v-model="newItem.bankcard">
+                        <option :value="bankcard" v-for="bankcard in store.bankCardList"> {{bankcard.name}}</option>
+        
+                    </select></td>
                 <td ><input v-model="newItem.name"</td>
                 <td ><input v-model="newItem.value"</td>
                 <td > 

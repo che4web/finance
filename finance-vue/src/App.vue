@@ -1,6 +1,12 @@
 <script setup>
+import {onMounted} from "vue"
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import {useBackCardStore} from "@/stores/bankCard.js"
+let store = useBackCardStore()
+onMounted(()=>{
+    store.getBankCardList()
+})
 </script>
 
 <template>

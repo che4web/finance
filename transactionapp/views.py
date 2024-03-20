@@ -20,11 +20,20 @@ class OperationFilter(django_filters.FilterSet):
         fields = '__all__'
 
 
+class BankCardInlineSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField()
+    class Meta:
+
+        model = BankCard
+        exclude=["img"]
+
+
 class OperationSerializer(serializers.ModelSerializer):
-    bankcard = serializers.PrimaryKeyRelatedField(queryset=BankCard.objects.all())
+    bankcard = BankCardInlineSerializer()
 
     def create(self, validated_data):
-        bankcard = validated_data.pop('bankcard')
+        bankcard_id = validated_data.pop('bankcard')
+        bankcard = BankCard.objects.get(id=bankcard_id['id'])
         op =  Operation(bankcard=bankcard,**validated_data)
         op.save()
         return op
